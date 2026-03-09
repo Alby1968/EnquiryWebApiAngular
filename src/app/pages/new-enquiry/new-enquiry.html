@@ -1,0 +1,133 @@
+<div class="parent">
+  <div class="container">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>New Enquiry</h2>
+      </div>
+
+      <form id="form1" class="form" #enquiryForm="ngForm">
+        <div class="row">
+          <div class="col-6">
+            <label for="enquiryTypeId">Enquiry Type</label>
+            <select
+              id="enquiryTypeId"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.enquiryTypeId"
+              name="enquiryTypeId"
+              
+            >
+              <option value="" disabled>Select Value</option>
+              @for(item of typeList | async; track $index) {
+              <option  [value]="item.typeId">{{item.typeName}}</option>
+              }
+            </select>
+          </div>
+          <div class="col-6">
+            <label for="enquiryStatusId">Enquiry Status</label>
+            <select
+              id="enquiryStatusId"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.enquiryStatusId"
+              name="enquiryStatusId"
+              
+            >
+              <option value="" disabled>Select Value</option>
+              @for(item of statusList | async; track $index) {
+              <option [value]="item.statusId">{{item.status}}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="row">
+         <div class="col-6">
+              <label for="customerName">Customer Name</label>
+              <input #customerName="ngModel"
+                type="text"
+                id="customerName"
+                class="form-control"
+                [(ngModel)]="newEnquiryObject.customerName"
+                name="customerName"
+              required/>
+              @if(customerName.errors?.['required'] && customerName.touched) {
+              <span  style="color:red">Customer Name is required</span>
+              }  
+            </div>
+          <div class="col-6">
+            <label for="mobileNo">Mobile No</label>
+            <input #mobileNo="ngModel"
+              type="text"
+              id="mobileNo"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.mobileNo"
+              name="mobileNo"
+              required
+            />
+             @if(mobileNo.errors?.['required'] && mobileNo.touched) {
+              <span  style="color:red">MobileNo is required</span>
+              }  
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="email">Email</label>
+            <input #email="ngModel"
+              type="email"
+              id="email"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.email"
+              name="email"
+              email
+            />
+            @if(email.errors?.['email'] && email.touched) {
+              <span  style="color:red">Email is not correct</span>
+              }  
+          </div>
+          <div class="col-6">
+              <label for="createdDate">Created Date</label>
+              <input #createdDate="ngModel"
+              type="date"
+              id="createdDate"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.createdDate"
+              name="createdDate"
+              required
+            />
+             @if(createdDate.errors?.['required'] && createdDate.touched) {
+              <span  style="color:red">Created Date is required</span>
+              }  
+            </div>
+        </div>
+        <label for="message">Message</label>
+        <textarea #message="ngModel"
+          id="message"
+          name="message"
+          class="form-control"
+          [(ngModel)]="newEnquiryObject.message"
+          name="message"
+          rows="5"
+          required
+        ></textarea>
+       
+        @if(message.errors?.['required'] && message.touched) {
+              <span  style="color:red">Message is required</span>
+              }  
+               
+        
+        <label for="resolution">Resolution</label>
+        <textarea
+          id="resolution"
+          name="resolution"
+          class="form-control"
+          rows="3"
+          [(ngModel)]="newEnquiryObject.resolution"
+        ></textarea>
+
+        <div class="actions">
+          <button type="submit" [disabled]="enquiryForm.invalid" (click)="onSave()">Create Enquiry</button>
+
+          <button type="reset" (click)="onReset()">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

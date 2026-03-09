@@ -1,0 +1,36 @@
+ .parent {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    form {
+      max-width: 600px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    .actions {
+      margin-top: 20px;
+    }
+    .actions button {
+      padding: 10px 15px;
+      margin-right: 10px;
+    }
+    input.ng-invalid.ng-touched{
+      background-color: red ! important;
+    }
+    input.ng-valid.ng-touched{
+      background-color: green ! important;
+    }
+    textarea.ng-invalid.ng-touched{
+      background-color: red ! important;
+    }
+    textarea.ng-valid.ng-touched{
+      background-color: green ! important;
+    }
+    

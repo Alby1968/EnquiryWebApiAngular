@@ -1,0 +1,180 @@
+<div class="container mt-4">
+  <div class="row">
+    @for (item of enquiryList; track item.enquiryId) {
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title bg-success">Id {{ item.enquiryId }}</h6>
+            <h5 class="card-title">{{ item.customerName }}</h5>
+
+            <p class="card-text">
+              <strong>Telefono:</strong> {{ item.mobileNo }}
+            </p>
+
+            <p class="card-text">
+              <strong>Email:</strong> {{ item.email }}
+            </p>
+
+            <p class="card-text">
+              <strong>Messaggio:</strong> {{ item.message }}
+            </p>
+
+            <p class="card-text">
+              <strong>Stato:</strong> {{ item.enquiryStatusId }} {{ getStatus(item.enquiryStatusId) }}
+            </p>
+
+             <p class="card-text">
+              <strong>Tipo:</strong> {{ item.enquiryTypeId }} {{ getType(item.enquiryTypeId)  }}
+            </p>
+
+            <p class="card-text">
+              <strong>Data creazione:</strong> {{ item.createdDate | date:'dd/MM/yyyy' }}
+            </p>
+          </div>
+          <div class="card-text">
+            <strong>Risoluzione:</strong> {{ item.resolution }}
+          </div>
+          <div class="card-footer justify-content-between"></div>
+            <button class="btn btn-success btn-sm mb-2" (click)="onEdit(item)">Modifica</button>
+            <button class="btn btn-danger btn-sm"  (click)="onDelete(item.enquiryId)">Elimina</button>
+          </div>
+        </div>
+    }
+  </div>
+
+  
+  <!-- Modal for Add/Edit -->
+  <div class="modal " #empModal tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="employeeForm" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="employeeModalLabel">Add/Edit Employee</h5>
+          <button type="button" class="btn-close" (click)="CloseModal()" aria-label="Close"></button>
+        </div>
+                <div class="row">
+          <div class="col-6">
+            <label for="enquiryTypeId">Enquiry Type</label>
+            <select
+              id="enquiryTypeId"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.enquiryTypeId"
+              name="enquiryTypeId"
+              
+            >
+              <option value="" disabled>Select Value</option>
+              @for(item of typeList; track $index) {
+              <option  [value]="item.typeId">{{item.typeName}}</option>
+              }
+            </select>
+          </div>
+          <div class="col-6">
+            <label for="enquiryStatusId">Enquiry Status</label>
+            <select
+              id="enquiryStatusId"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.enquiryStatusId"
+              name="enquiryStatusId"
+              
+            >
+              <option value="" disabled>Select Value</option>
+              @for(item of statusList; track $index) {
+              <option [value]="item.statusId">{{item.status}}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="row">
+         <div class="col-6">
+              <label for="customerName">Customer Name</label>
+              <input #customerName="ngModel"
+                type="text"
+                id="customerName"
+                class="form-control"
+                [(ngModel)]="newEnquiryObject.customerName"
+                name="customerName"
+              required/>
+              @if(customerName.errors?.['required'] && customerName.touched) {
+              <span  style="color:red">Customer Name is required</span>
+              }  
+            </div>
+          <div class="col-6">
+            <label for="mobileNo">Mobile No</label>
+            <input #mobileNo="ngModel"
+              type="text"
+              id="mobileNo"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.mobileNo"
+              name="mobileNo"
+              required
+            />
+             @if(mobileNo.errors?.['required'] && mobileNo.touched) {
+              <span  style="color:red">MobileNo is required</span>
+              }  
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="email">Email</label>
+            <input #email="ngModel"
+              type="email"
+              id="email"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.email"
+              name="email"
+              email
+            />
+            @if(email.errors?.['email'] && email.touched) {
+              <span  style="color:red">Email is not correct</span>
+              }  
+          </div>
+          <div class="col-6">
+              <label for="createdDate">Created Date</label>
+              <input #createdDate="ngModel"
+              type="date"
+              id="createdDate"
+              class="form-control"
+              [(ngModel)]="newEnquiryObject.createdDate"
+              name="createdDate"
+              required
+            />
+             @if(createdDate.errors?.['required'] && createdDate.touched) {
+              <span  style="color:red">Created Date is required</span>
+              }  
+            </div>
+        </div>
+        <label for="message">Message</label>
+        <textarea #message="ngModel"
+          id="message"
+          name="message"
+          class="form-control"
+          [(ngModel)]="newEnquiryObject.message"
+          name="message"
+          rows="5"
+          required
+        ></textarea>
+       
+        @if(message.errors?.['required'] && message.touched) {
+              <span  style="color:red">Message is required</span>
+              }  
+               
+        
+        <label for="resolution">Resolution</label>
+        <textarea
+          id="resolution"
+          name="resolution"
+          class="form-control"
+          rows="3"
+          [(ngModel)]="newEnquiryObject.resolution"
+        ></textarea>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="CloseModal()">Cancel</button>
+          
+          <button type="button" class="btn btn-primary" id="saveBtn" (click)="onReset()">Reset</button>
+          
+           <button type="button" class="btn btn-primary" id="updateBtn" (click)="onUpdate()">Update</button>
+          
+        </div>
+      </form>
+    </div>
+</div>
