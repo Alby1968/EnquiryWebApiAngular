@@ -5,43 +5,40 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class Master {
-  
-  constructor(private http: HttpClient) {
-    
-    
-  }
+
+  private baseUrl = 'https://enquirywebapi.onrender.com/api/enquirymaster';
+
+  constructor(private http: HttpClient) {}
 
   createEnquiry(enquiry: any) {
-    return this.http.post('https://localhost:7158/api/enquirymaster/CreateNewEnquiry', enquiry);
+    return this.http.post(`${this.baseUrl}/CreateNewEnquiry`, enquiry);
   }
 
-  uodateEnquiry(enquiry: any) {
-    return this.http.put('https://localhost:7158/api/enquirymaster/UpdateEnquiry', enquiry);
+  updateEnquiry(enquiry: any) {
+    return this.http.put(`${this.baseUrl}/UpdateEnquiry`, enquiry);
   }
 
   deleteEnquiry(id: number) {
-    // return this.http.delete(`https://localhost:7158/api/enquirymaster/DeleteEnquiryById${id}`);
-    return this.http.delete('https://localhost:7158/api/enquirymaster/DeleteEnquiryById?id=' + id);
+    return this.http.delete(`${this.baseUrl}/DeleteEnquiryById?id=${id}`);
   }
 
-
   getEnquiryTypes() {
-    return this.http.get('https://localhost:7158/api/enquirymaster/GetAllTypes');
-   }
+    return this.http.get(`${this.baseUrl}/GetAllTypes`);
+  }
 
   getEnquiryStatuses() {
-    return this.http.get('https://localhost:7158/api/enquirymaster/GetAllStatus');
+    return this.http.get(`${this.baseUrl}/GetAllStatus`);
   }     
 
   getEnquiryAll() {
-    return this.http.get('https://localhost:7158/api/enquirymaster/GetAllEnquiry');
+    return this.http.get(`${this.baseUrl}/GetAllEnquiry`);
   } 
 
   getTypeById(id: number) {
-    return this.http.get('https://localhost:7158/api/enquirymaster/GetAllTypeById?id=' + id);
+    return this.http.get(`${this.baseUrl}/GetAllTypeById?id=${id}`);
   }
 
   getStatusById(id: number) {
-    return this.http.get('https://localhost:7158/api/enquirymaster/GetAllStatusById?id=' + id);
-}
+    return this.http.get(`${this.baseUrl}/GetAllStatusById?id=${id}`);
+  }
 }

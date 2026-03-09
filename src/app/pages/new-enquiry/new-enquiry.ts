@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Master } from '../../services/master';
+import { Master } from '../../services/masterOLD';
 import { Observable } from 'rxjs';
 import { AsyncPipe, DatePipe } from '@angular/common';
 
