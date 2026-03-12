@@ -1,12 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+; 
+
+
+
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class Master {
 
   private baseUrl = 'https://enquirywebapi.onrender.com/api/enquirymaster';
+  // private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
