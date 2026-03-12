@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
 })
 export class Master {
 
-  private baseUrl = 'https://enquirywebapi.onrender.com/api/enquirymaster';
+  private baseUrl = 'https://enquirywebapi.onrender.com/api/EnquiryMaster';
   // private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
